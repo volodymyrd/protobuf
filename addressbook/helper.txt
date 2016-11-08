@@ -1,0 +1,3 @@
+protoc -I=C:\Users\Volodymyr_Dotsenko\workspaces\learning\protobuf\addressbook\src\main\java\
+com\gmail\volodymyrdotsenko\addressbook --java_out=C:\Users\Volodymyr_Dotsenko\workspaces\learning\protobuf\addressbook\src\main\java C:\Users\Volodymyr_Dotsenko\
+workspaces\learning\protobuf\addressbook\src\main\java\com\gmail\volodymyrdotsenko\addressbook\addressbook.proto
