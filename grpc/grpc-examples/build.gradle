@@ -18,8 +18,11 @@ repositories {
 }
 
 def grpcVersion = '1.0.1'
+//def guavaVersion = '20.0'
 
 dependencies {
+//    compile "com.google.guava:guava:${guavaVersion}"
+
     compile "io.grpc:grpc-netty:${grpcVersion}"
     compile "io.grpc:grpc-protobuf:${grpcVersion}"
     compile "io.grpc:grpc-stub:${grpcVersion}"
@@ -76,9 +79,23 @@ task helloWorldClient(type: CreateStartScripts) {
     classpath = jar.outputs.files + project.configurations.runtime
 }
 
+task routeGuideServer(type: CreateStartScripts) {
+    mainClassName = 'com.gmail.volodymyrdotsenko.grpc.examples.routeguide.RouteGuideServer'
+    applicationName = 'route-guide-server'
+    outputDir = new File(project.buildDir, 'tmp')
+    classpath = jar.outputs.files + project.configurations.runtime
+}
+
+task routeGuideClient(type: CreateStartScripts) {
+    mainClassName = 'com.gmail.volodymyrdotsenko.grpc.examples.routeguide.RouteGuideClient'
+    applicationName = 'route-guide-client'
+    outputDir = new File(project.buildDir, 'tmp')
+    classpath = jar.outputs.files + project.configurations.runtime
+}
+
 applicationDistribution.into('bin') {
-    //from(routeGuideServer)
-    //from(routeGuideClient)
+    from(routeGuideServer)
+    from(routeGuideClient)
     from(helloWorldServer)
     from(helloWorldClient)
     //from(compressingHelloWorldClient)
